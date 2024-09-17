@@ -184,7 +184,6 @@ scene.add(mainGroup);
 function animate() {
   requestAnimationFrame(animate);
   mainGroup.rotation.y += 0.01; // Rotate along the Y-axis
-
   renderer.render(scene, camera);
 }
 animate();

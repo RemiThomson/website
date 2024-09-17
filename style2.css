@@ -1,0 +1,138 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Set background color to black */
+    color: #fff; /* Default text color */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+  
+  #page-title {
+    font-size: 55px; /* Adjust the font size as needed */
+    color: #ffffff;
+    text-align: center;
+    padding: 40px; /* Add padding to ensure space around text */
+    width: 100%; /* Ensure it spans the full width */
+    background: rgba(0, 0, 0, 0.8); /* Slightly transparent background for visibility */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Optional: Add a shadow for better visibility */
+    margin: 0; /* Remove default margin */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  
+  .content {
+    display: none;
+    text-align: left; /* Left align large blocks of text */
+    width: 80%;
+    max-width: 800px;
+    color: #fff; /* Text color set to white for contrast */
+    padding: 20px;
+    border-radius: 8px;
+    background: #222; /* Dark background for content containers */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: 20px auto; /* Center content horizontally and add margin for spacing */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  
+  .visible {
+    display: block;
+  }
+  
+  h1 {
+    font-size: 28px;
+    margin-top: 20px;
+    color: #fff; /* Text color set to white */
+  }
+  
+  h2 {
+    font-size: 20px;
+    margin-top: 20px;
+    color: #fff; /* Text color set to white */
+  }
+  
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ccc; /* Text color set to a lighter gray */
+    margin-bottom: 20px; /* Add space below paragraphs */
+  }
+  
+  pre {
+    background-color: #333; /* Dark background for code blocks */
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    font-size: 14px;
+    color: #fff; /* Text color set to white */
+    margin-bottom: 20px; /* Add space below code blocks */
+  }
+  
+  code {
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 14px;
+    color: #f8f8f2; /* Light color for code */
+  }
+  
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  
+  a {
+    color: #1e90ff; /* Blue color for links */
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .diagram-img {
+    width: 80%;
+    max-width: 600px;
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image horizontally */
+  }
+  /* Navigation bar container */
+  .nav-bar {
+    position: fixed; /* Fixed positioning to stay at the top right */
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #333; /* Dark background for visibility */
+    border-radius: 0 0 0 10px; /* Rounded bottom left corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Shadow for better visibility */
+    display: flex;
+    flex-direction: column; /* Align buttons vertically */
+    gap: 10px; /* Space between buttons */
+    z-index: 1000; /* Ensure it's above other content */
+  }
+  
+  /* Style for each button */
+  .nav-button {
+    color: #fff; /* White text color */
+    background-color: #555; /* Dark background for buttons */
+    padding: 8px 15px;
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners for buttons */
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s; /* Smooth color transition */
+  }
+  
+  /* Hover effect for buttons */
+  .nav-button:hover {
+    background-color: #777; /* Lighter background on hover */
+  }
+  
+  
