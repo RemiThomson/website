@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div class="nav-bar">
+        <a href="index.html" class="nav-button">Home Page</a>
+        <a href="index2.html" class="nav-button">3D Website</a>
+        <a href="index3.html" class="nav-button">Digital Converter</a>
+    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thermistor with Fan Control Project</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+    <div id="page-title">Thermometer with Fan Control Project</div>
+
+    <div class="content visible">
+        <h2>Component Introduction</h2>
+        <h3>Thermistor</h3>
+        <p>A thermistor is a type of thermal resistor whose resistance significantly changes with temperature. Unlike standard resistors, which have minimal resistance variation with temperature, thermistors are designed to have a substantial resistance change. Thermistors come in two types: NTC (Negative Temperature Coefficient) and PTC (Positive Temperature Coefficient). NTC thermistors are commonly used for temperature measurement due to their sensitivity, while PTC thermistors are often used as resettable fuses. As temperature increases, PTC thermistors increase resistance, reducing current flow and protecting circuits from overheating.</p>
+
+        <h3>Fan Control System</h3>
+        <p>In this project, the thermistor's temperature data is utilized to control a fan. The system is programmed to automatically turn on the fan when the temperature exceeds 24°C and turn it off when it drops below this threshold. This feature is crucial in environments where overheating could pose a risk, ensuring that the temperature remains within a safe range.</p>
+
+        <h2>Project Overview</h2>
+        <p>This project involved wiring and programming an LCD1602 module to display real-time temperature readings captured from a thermistor. The temperature is displayed in both Celsius and Fahrenheit on the LCD. The fan, wired to a digital pin on the Arduino, is controlled based on the temperature readings. The integration of these components demonstrates a practical application of embedded systems in managing environmental conditions.</p>
+
+        <h2>Key Activities</h2>
+        <ul>
+            <li><strong>Arduino Programming:</strong> Wrote and uploaded Arduino code to control the LCD display and calculate temperature values.</li>
+            <li><strong>LCD Setup:</strong> Configured the LCD to display temperature readings, adjusting the contrast with a potentiometer for optimal clarity.</li>
+            <li><strong>Fan Control:</strong> Managed the fan's operation based on the temperature readings, ensuring it responded correctly to temperature changes.</li>
+            <li><strong>Data Conversion and Display:</strong> Implemented code to accurately convert temperature readings from the thermistor into both Celsius and Fahrenheit, ensuring real-time updates on the LCD.</li>
+            <li><strong>Debugging:</strong> Troubleshooted and resolved issues related to circuit connections and code to ensure smooth operation.</li>
+        </ul>
+
+        <h2>Skills Developed</h2>
+        <p>This project enhanced several key skills, including:</p>
+        <ul>
+            <li><strong>Circuit Design and Assembly:</strong> Gained hands-on experience in designing and assembling circuits, including proper wiring and component placement.</li>
+            <li><strong>Embedded Systems Programming:</strong> Improved proficiency in Arduino programming, particularly in using the LiquidCrystal library and handling sensor data.</li>
+            <li><strong>Data Conversion and Display:</strong> Developed the ability to process and display sensor data effectively, ensuring user-friendly and accurate output on the LCD.</li>
+            <li><strong>Debugging:</strong> Strengthened problem-solving skills through debugging code and hardware connections, leading to a more reliable system.</li>
+        </ul>
+
+        <h2>Code</h2>
+        <p>The following code reads the temperature from the thermistor and controls the fan based on the temperature threshold. Ensure the <code>LiquidCrystal</code> library is installed before uploading the code to the Arduino.</p>
+
+        <pre><code>
+#include LiquidCrystal.h
+
+int tempPin = 0;            // Analog pin where the thermistor is connected
+int fanPin = 2;             // Digital pin where the fan is connected
+LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
+
+const float temperatureThreshold = 24.0; // Temperature threshold in Celsius
+
+void setup() {
+  lcd.begin(16, 2);
+  pinMode(fanPin, OUTPUT); // Set fanPin as output
+}
+
+void loop() {
+  int tempReading = analogRead(tempPin);
+
+  double tempK = log(10000.0 * ((1024.0 / tempReading - 1)));
+  tempK = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * tempK * tempK )) * tempK );       // Temp Kelvin
+  float tempC = tempK - 273.15;            // Convert Kelvin to Celsius
+  float tempF = (tempC * 9.0)/ 5.0 + 32.0; // Convert Celsius to Fahrenheit
+
+  // Control the fan based on temperature
+  if (tempC > temperatureThreshold) {
+    digitalWrite(fanPin, HIGH); // Turn on the fan
+  } else {
+    digitalWrite(fanPin, LOW);  // Turn off the fan
+  }
+
+  // Display Temperature in C
+  lcd.setCursor(0, 0);
+  lcd.print("Temp         C  ");
+  lcd.setCursor(6, 0);
+  lcd.print(tempC);
+  
+  // Display Temperature in F (optional)
+  // lcd.setCursor(0, 1);
+  // lcd.print("Temp         F  ");
+  // lcd.setCursor(6, 1);
+  // lcd.print(tempF);
+
+  delay(500);
+}
+        </code></pre>
+    </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Navigation bar -->
+    <div class="nav-bar">
+        <a href="index.html" class="nav-button">Home Page</a>
+        <a href="index2.html" class="nav-button">3D Website</a>
+        <a href="index4.html" class="nav-button">Thermometer</a>
+    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Systems Report</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div id="page-title">Embedded Systems Report</div>
+    <div class="content visible">
+        <h1>1 Introduction</h1>
+        <p>In this project I designed an audio amplifier circuit made for amplifying signals from a microphone. The main purpose of this circuit was to create signals suitable for digital conversion by an Analog to Digital Converter on an STM32 board. This report will go through the process of what I did during the process of making this circuit, starting from simulations in LT-Spice allowing initial simulations of the circuit. Then moving onto the construction of the breadboard, and finally moving on to the final testing phase of the completed circuit using STM software and MATLAB to plot the results. I will be discussing each of these steps in detail explaining the component values and designs I chose.</p>
+
+        <h1>2 Circuit Design</h1>
+        <p>The Design of the amplifier circuit was based on using the MCP6271 op-amp. This section will be describing how I determined component values, specifically R0 to R4 and the capacitors C0 and C1. It will also be describing the modifications I made to my circuit and what the reasons for the changes were.</p>
+
+        <h2>2.1 Resistor values:</h2>
+        <p><strong>R0 (2.2kΩ):</strong> This resistor served as a load capacitor for the microphone. Its value was chosen by looking at the data sheet for the microphone and looking at the value which was listed as RL. The purpose of this resistor was to act as a high-pass filter with C0.</p>
+        <p><strong>R1 (2.2kΩ) and R2 (220kΩ):</strong> These are the resistors that connect to the inverting input of the op-amp. These two resistors determine the gain of the circuit for the AC signal component. To choose the value of the resistors I set the value of R1 to 2.2kΩ and kept increasing the value of R2 until I got to 220kΩ which gave me a reasonable value for my gain of 1V peak to peak using the simulation tests given.</p>
+        <p><strong>R3 and R4 (1kΩ):</strong> These resistors are to set the DC bias voltage at the non-inverting input of the op-amp. The values of R3 and R4 were chosen to be the same, so that the voltage at V+ would be half of the supply voltage 3.3V. I used a value of 1kΩ because it provides a reasonably high input impedance. This was so that it wouldn’t load down the microphone.<br>
+        V<sub>+</sub>=V<sub>ss</sub>×R<sub>4</sub>/(R<sub>3</sub>+R<sub>4</sub>)=3.3V×1kΩ/(1kΩ+1kΩ)=1.65V</p>
+
+        <h2>2.2 Capacitor values:</h2>
+        <p><strong>C0 (1μ):</strong> This value was chosen by looking at the microphone data sheet. C0 acts like a high pass filter. It blocks the microphone DC current from entering the amplifier and ensures that the cutoff frequency is low enough to pass AC microphone signals at above 300Hz.<br>
+        f<sub>C</sub>=1/(2π×C<sub>0</sub>×R<sub>1</sub>)=1/(2π×1uF×2.2kΩ)=72Hz</p>
+        <p><strong>C1 (220pF):</strong> C1 acts like a lowpass filter. It allows the amplified speech to pass to the digitiser and was designed to filter out frequencies that were above 3kHz.<br>
+        f<sub>C</sub>=1/(2π×C<sub>1</sub>×R<sub>2</sub>)=1/(2π×220pF×220kΩ)=3288Hz</p>
+
+        <h2>2.3 Changes made:</h2>
+        <p>My original design changed slightly from the class test in week 7. The reason for this was that I had too small a value for R2 (22kΩ). This meant that when I went to build my circuit in the lab, I was only getting a voltage peak to peak level of 340mV on the oscilloscope which was too low. This was happening because I didn’t have a high enough gain on my circuit. When I changed my value of R2 from 22kΩ to 220kΩ it also meant that my cutoff frequency for the lowpass filter would be incorrect, so I had to change my value of C1 from 2.2nF to 220pF. As well as this I had to decrease the value of R1 to 1kΩ on my practical circuit because I wasn’t getting a high enough gain when measuring the AC voltage.</p>
+
+        <h1>3 Circuit Testing</h1>
+        <p>To test the circuit, I built my LT-Spice schematic onto my breadboard and added 2 decoupling capacitors and an LED circuit as well. Once I had built this, I disconnected the microphone from the circuit and built a new Thevenin equivalent circuit with a potential divider to reduce the voltage level by 11 times. For this circuit I chose the following values: R5 (2.2kΩ), R6 (220Ω), R0 (2.2kΩ), R1 (2.2kΩ), C0 (2.2uF). I first checked the DC level on the circuit. To do this I attached the multimeter clip to a test pin connected to ground and using the probe I found the DC level on the inverting/non-inverting inputs and the output. The DC level at all these points was 1.65V which was the expected value as it is half of 3.3V. To check I was getting an appropriate gain for the circuit, I set up the waveform generator by attaching one of its clips to ground and the other to a test pin on the Thevenin equivalent circuit. I then set a 150mV wave with a 1kHz frequency, I used the waveform generator to measure the peak-to-peak voltage at the output which was 1.1V which was just a bit higher than the required value of 1V. This showed that my circuit had an appropriate voltage gain. I also checked the voltage across R6 which was 11mV to check that the potential divider was working correctly. This meant my AC voltage gain was 100.<br>
+        A<sub>V</sub>=V<sub>out</sub>/V<sub>in</sub>=1.1V/10mV=100</p>
+        <p>To test the cutoff frequency, I just increased the frequency in small increments until the voltage became unstable. This gave me a value of 3100Hz which was a bit lower than my expected value of 3288Hz. I did the same by decreasing to find my other cutoff frequency which was 150Hz, this was a bit higher than the 72Hz I was theoretically expecting. I suspect that this could have been due to my values of C0, R0, R1 being incorrect. To record the data, I plugged in my ADC input straight into the op-amp's output. I then created some code on the STM software and recorded it using Putty. I then plotted a graph of my data into MATLAB to check the values. The quality of the graph showed that the amplifier was successful but that I could have better designed some of my component values to reduce some of the noise.</p>
+
+        <h1>4 Conclusion</h1>
+        <p>During this project, I have bettered my overall understanding of how to develop simulated and practical circuits in the lab. The process of choosing component values and simulating my original design on LT-Spice has helped me visualize graphically how changing values affected my circuit. This project has also developed my skills with using a breadboard and constructing circuits from schematic designs. Furthermore, my proficiency with using the tools in the lab like the oscilloscope and waveform generator has also improved. This helped when I was finding the DC levels across my board which were 1.65V at all the inputs/outputs of the op-amp. Using the waveform generator, I was able to create a waveform into my potential divider and reduce it to 11mV. I then also showed that my circuit was functioning correctly with a gain of 100 so that when I measured V<sub>out</sub> I got an AC value of 1.1V peak to peak. Using the waveform generator to alter the frequency through testing I found my cutoff frequencies to be 150Hz and 3100Hz. These values showed how my results from practical circuits could deviate from the simulated results.</p>
+
+        <div class="diagram">
+            <h2>Breadboard Diagram 1</h2>
+            <img src="breadboard.png" alt="Breadboard Diagram 1" class="diagram-img">
+        </div>
+        <div class="diagram">
+            <h2>Breadboard Diagram 2</h2>
+            <img src="breadboard2.png" alt="Breadboard Diagram 2" class="diagram-img">
+        </div>
+        <div class="diagram">
+            <h2>MATLAB Plot</h2>
+            <img src="matlab_plot.png" alt="MATLAB Plot" class="diagram-img">
+        </div>        
+    </div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Navigation bar -->
+    <div class="nav-bar">
+      <a href="index.html" class="nav-button">Home Page</a>
+      <a href="index3.html" class="nav-button">Digital Converter</a>
+      <a href="index4.html" class="nav-button">Thermometer</a>
+  </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Portfolio Project Explanation</title>
+    <link rel="stylesheet" href="style2.css" /> <!-- Link to the external CSS file -->
+</head>
+
+<body>
+    
+    <div id="page-title">3D Portfolio Project Explanation</div>
+
+    <div id="content" class="content visible">
+        <h1>Overview</h1>
+        <p>
+            This project is a 3D portfolio website that leverages Three.js for 3D rendering and interaction. The website allows users to navigate through different sections of the portfolio by rotating a 3D object (a pentagon in this case) using the left and right arrow keys. Each face of the pentagon corresponds to a different section of the portfolio, such as "Contact Information," "Skills and Technology," and "Projects Showcase."
+        </p>
+
+        <h2>Three.js Setup</h2>
+        <p>
+            The project begins by setting up the Three.js scene, camera, and renderer. The camera is positioned at a suitable distance to view the 3D object, and several light sources are added to illuminate the scene. A group is created to hold the main elements: the globe model and the text planes.
+        </p>
+        <pre><code>
+// Setup
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(0, 20, 50);
+
+const renderer = new THREE.WebGLRenderer({
+  canvas: document.querySelector('#bg'),
+});
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth, window.innerHeight);
+        </code></pre>
+
+        <h2>Lighting</h2>
+        <p>
+            To make the 3D environment visually appealing, ambient light, a point light, and a directional light (referred to as "sun") are added to the scene. The directional light casts shadows, which adds depth to the 3D object.
+        </p>
+        <pre><code>
+const ambientLight = new THREE.AmbientLight(0x404040);
+scene.add(ambientLight);
+
+const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+pointLight.position.set(25, 25, 25);
+scene.add(pointLight);
+
+const sun = new THREE.DirectionalLight(0xffffff, 2);
+sun.position.set(50, 50, 50);
+sun.castShadow = true;
+scene.add(sun);
+        </code></pre>
+
+        <h2>Textured Planes</h2>
+        <p>
+            Each face of the pentagon has a corresponding plane with a text texture. The text is created dynamically from HTML elements using the <code>CanvasRenderingContext2D</code> API. The planes are positioned around the central model to form a pentagon.
+        </p>
+        <pre><code>
+// Function to create a texture with text from HTML elements
+function createTextTextureFromHTML(elementId) {
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  canvas.width = 256;
+  canvas.height = 256;
+  context.fillStyle = '#ffffff';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  const text = document.getElementById(elementId).innerText;
+  context.fillStyle = '#ff0000';
+  context.font = '30px Arial';
+  context.textAlign = 'center';
+  context.textBaseline = 'middle';
+  context.fillText(text, canvas.width / 2, canvas.height / 2);
+  return new THREE.CanvasTexture(canvas);
+}
+        </code></pre>
+
+        <h2>Rotation and Navigation</h2>
+        <p>
+            The main interactive feature of the website is the ability to rotate the pentagon using the arrow keys. The rotation is controlled by smoothly interpolating between the current rotation and the target rotation.
+        </p>
+        <pre><code>
+// Function to rotate the group based on the direction
+function rotateGroup(direction) {
+  const newTargetRotation = direction === 'left'
+    ? currentRotation.value - rotationIncrement
+    : currentRotation.value + rotationIncrement;
+
+  targetRotation.value = THREE.MathUtils.euclideanModulo(newTargetRotation, Math.PI * 2);
+}
+
+// Function to update the rotation smoothly
+function updateRotation() {
+  const diff = THREE.MathUtils.euclideanModulo(targetRotation.value - currentRotation.value, Math.PI * 2);
+  const shortest = (diff > Math.PI) ? diff - Math.PI * 2 : diff;
+
+  if (Math.abs(shortest) rotationSpeed) {
+    currentRotation.value = targetRotation.value;
+  } else {
+    currentRotation.value += (shortest > 0 ? rotationSpeed : -rotationSpeed);
+  }
+
+  currentRotation.value = THREE.MathUtils.euclideanModulo(currentRotation.value, Math.PI * 2);
+}
+        </code></pre>
+
+        <h2>Content Display</h2>
+        <p>
+            As the pentagon rotates, the content for each face is displayed accordingly. The currently visible face's content is shown, while the others are hidden.
+        </p>
+        <pre><code>
+function showFace(faceId) {
+  document.querySelectorAll('.content').forEach(face => {
+    face.classList.add('hidden');
+    face.classList.remove('visible');
+  });
+  
+  document.getElementById(faceId).classList.add('visible');
+  document.getElementById(faceId).classList.remove('hidden');
+}
+        </code></pre>
+
+        <h2>3D Model Loading</h2>
+        <p>
+            A 3D model of the Earth is loaded using the <code>GLTFLoader</code>. This model is added to the central group and scales based on the selected face.
+        </p>
+        <pre><code>
+// Initialize GLTFLoader
+const loader = new GLTFLoader();
+let model;
+
+loader.load(
+  '/earth_cartoon2.glb',
+  (gltf) => {
+    model = gltf.scene;
+    model.scale.set(0.2, 0.2, 0.2);
+    model.position.set(0, 0, 0);
+    group.add(model);
+    model.rotation.y += Math.PI / 2;
+    console.log('Model loaded successfully');
+  },
+  undefined,
+  (error) => {
+    console.error('An error happened while loading the model', error);
+  }
+);
+        </code></pre>
+
+        <h2>Animation Loop</h2>
+        <p>
+            The <code>animate()</code> function is responsible for the continuous rendering of the scene. It updates the rotation, camera position, and the displayed content.
+        </p>
+        <pre><code>
+function animate() {
+  requestAnimationFrame(animate);
+
+  if (model) {
+    updateRotation();
+    group.rotation.y = -Math.PI / 2 + currentRotation.value;
+
+    currentLookAt.lerp(targetLookAt, lookAtSpeed);
+    camera.lookAt(currentLookAt);
+
+    updateCurrentFaceText();
+    renderer.render(scene, camera);
+  }
+}
+
+// Start the animation
+animate();
+        </code></pre>
+
+        <h2>Conclusion</h2>
+        <p>
+            This project showcases how Three.js can be used to create interactive 3D websites. The combination of 3D models, textures, and dynamic content provides a unique and engaging user experience.
+        </p>
+    </div>
+
+    <!-- Canvas for the Three.js Scene (background) -->
+    <canvas id="bg"></canvas>
+</body>
+
+</html>
