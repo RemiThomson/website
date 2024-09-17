@@ -5,15 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Remi Thomson's Portfolio</title>
   <link rel="stylesheet" href="style.css" /> <!-- Link to the external CSS file -->
-  
+  <!-- Include Three.js and GLTFLoader -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/loaders/GLTFLoader.js"></script>
 </head>
-  <!-- <div class="nav-bar">
-    <a href="index2.html" class="nav-button">3D Website</a>
-    <a href="index3.html" class="nav-button">Digital Converter</a>
-    <a href="index4.html" class="nav-button">Thermometer</a>
-  </div> -->
 <body>
-  <div id="page-title" class="page-title-style">Welcome to my Online Portfolio</div>
+  <!-- Title for the entire page -->
+  <div id="page-title">Welcome to my Portfolio</div>
 
   <!-- Hidden text elements for each face of the pentagon -->
   <div id="face1-text" class="hidden-text">1</div>
@@ -95,8 +93,6 @@
     </div>
   </div>
   
-     
-
   <div id="content-face3" class="content hidden">
     <h1>Projects Showcase</h1>  
     <br>
@@ -110,7 +106,6 @@
     <a href="index4.html" class="button">View Project</a>
   </div>
   
-
   <div id="content-face5" class="content hidden">
     <h1>About Me</h1>
     <p>Hi there! I'm Remi, currently a student at the University of Edinburgh, where I'm working on my MEng in Electronics and Computer Science. I grew up in Aberdeen, where my love for the outdoors first began. Whether it was hiking, mountain biking, or just exploring the beautiful landscapes around me with friends. I always found myself drawn to adventure.
@@ -126,6 +121,7 @@
   <!-- Canvas for the Three.js Scene -->
   <canvas id="bg"></canvas>
 
-  <script type="module" src="index.js"></script>
+  <!-- Include the index.js script -->
+  <script type="module" src="/index.js"></script>
 </body>
 </html>
