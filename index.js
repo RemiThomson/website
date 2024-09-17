@@ -59,9 +59,9 @@ function rotatePentagon(direction) {
 
 // Event listener for keydown events to rotate the pentagon
 window.addEventListener('keydown', (event) => {
-  if (event.key === 'ArrowRight') {
+  if (event.key === 'ArrowLeft') {
     rotatePentagon('right');
-  } else if (event.key === 'ArrowLeft') {
+  } else if (event.key === 'ArrowRight') {
     rotatePentagon('left');
   }
 });
