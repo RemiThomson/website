@@ -8,25 +8,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/GLTFLoader.js"></script>
 </head>
-  <!-- <div class="nav-bar">
-    <a href="index2.html" class="nav-button">3D Website</a>
-    <a href="index3.html" class="nav-button">Digital Converter</a>
-    <a href="index4.html" class="nav-button">Thermometer</a>
-  </div> -->
 <body>
   <div id="page-title" class="page-title-style">Welcome to my Online Portfolio</div>
 
-  <!-- Hidden text elements for each face of the pentagon -->
-  <div id="face1-text" class="hidden-text">1</div>
-  <div id="face2-text" class="hidden-text">2</div>
-  <div id="face3-text" class="hidden-text">3</div>
-  <div id="face4-text" class="hidden-text">4</div>
-  <div id="face5-text" class="hidden-text">5</div>
-
-  <!-- Text to display the current face -->
+  <!-- Current face display -->
   <div id="current-face">1</div>
 
-  <!-- Content containers for each face (Initially hidden) -->
+  <!-- Content containers for each face -->
   <div id="content-face1" class="content visible">
     <h2>
       <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -38,7 +26,6 @@
 
   <div id="content-face2" class="content hidden">
     <h1>Contact Information</h1>
-    <br>
     <div class="contact-info">
       <h2>Contact Information</h2>
       <ul>
@@ -125,7 +112,7 @@
   </div>
 
   <!-- Canvas for the Three.js Scene -->
-  <canvas id="bg"></canvas>
+  <canvas id="modelCanvas"></canvas>
 
   <script type="module" src="index.js"></script>
 </body>
