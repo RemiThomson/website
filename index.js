@@ -16,13 +16,22 @@ function updateFaceContent(currentFaceIndex) {
 
   // Show the content for the current face
   const faceId = `content-face${currentFaceIndex + 1}`;
-  getById(faceId).classList.remove('hidden');
-  getById(faceId).classList.add('visible');
+  document.getElementById(faceId).classList.remove('hidden');
+  document.getElementById(faceId).classList.add('visible');
 
   // Update the current face text
-  const faceTexts = ['Welcome to my Online Portfolio', 'Contact Information and Socials', 'Skills and Technology', 'Projects Showcase', 'About Me'];
-  getById('current-face').innerText = faceTexts[currentFaceIndex];
+  const faceTexts = [
+    'Welcome to my Online Portfolio', 
+    'Contact Information and Socials', 
+    'Skills and Technology', 
+    'Projects Showcase', 
+    'About Me'
+  ];
+  const currentFace = document.getElementById('current-face');
+  currentFace.innerText = faceTexts[currentFaceIndex];
+  currentFace.classList.add('page-title-style'); // Ensure this class is applied
 }
+
 
 // Initialize the face index
 let faceIndex = 0;

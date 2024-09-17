@@ -34,7 +34,7 @@ ul {
   font-size: 17px;
 }
 
-#page-title {
+.page-title-style {
   position: fixed;
   top: 40px; /* Distance from the top of the page */
   left: 50%;
@@ -43,9 +43,16 @@ ul {
   color: #ffffff;
   text-align: center;
   z-index: 10; /* Ensure it’s above other content */
-  display: none; /* Initially hidden */
-  
 }
+
+#page-title {
+  display: none; /* Initially hidden */
+}
+
+#current-face {
+  display: block; /* Ensure it is visible when updating */
+}
+
 
 .content {
   position: absolute;
