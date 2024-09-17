@@ -30,8 +30,15 @@ function updateFaceContent(currentFaceIndex) {
   const currentFace = document.getElementById('current-face');
   currentFace.innerText = faceTexts[currentFaceIndex];
   currentFace.classList.add('page-title-style'); // Ensure this class is applied
-}
 
+  // Show or hide the title based on the current face index
+  const titleElement = document.getElementById('page-title');
+  if (currentFaceIndex === 0) {
+    titleElement.style.display = 'block'; // Show title on page 1
+  } else {
+    titleElement.style.display = 'none'; // Hide title on other pages
+  }
+}
 
 // Initialize the face index
 let faceIndex = 0;
