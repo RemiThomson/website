@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remi Thomson's Portfolio</title>
+  <link rel="stylesheet" href="style.css" /> <!-- Link to the external CSS file -->
+</head>
+  <!-- <div class="nav-bar">
+    <a href="index2.html" class="nav-button">3D Website</a>
+    <a href="index3.html" class="nav-button">Digital Converter</a>
+    <a href="index4.html" class="nav-button">Thermometer</a>
+  </div> -->
+<body>
+  <!-- Title for the entire page -->
+  <div id="page-title">Welcome to my Portfolio</div>
+
+  <!-- Hidden text elements for each face of the pentagon -->
+  <div id="face1-text" class="hidden-text">1</div>
+  <div id="face2-text" class="hidden-text">2</div>
+  <div id="face3-text" class="hidden-text">3</div>
+  <div id="face4-text" class="hidden-text">4</div>
+  <div id="face5-text" class="hidden-text">5</div>
+
+  <!-- Text to display the current face -->
+  <div id="current-face">1</div>
+
+  <!-- Content containers for each face (Initially hidden) -->
+  <div id="content-face1" class="content visible">
+    <h2>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      Use the arrow keys to move left or right
+      <br><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; ⬅️ &nbsp;  OR &nbsp; ➡️
+    </h2> 
+  </div>
+
+  <div id="content-face2" class="content hidden">
+    <h1>Contact Information</h1>
+    <br>
+    <div class="contact-info">
+      <h2>Contact Information</h2>
+      <ul>
+        <li>Email: <a href="mailto:remi.thomson@btinternet.com">remi.thomson@btinternet.com</a></li>
+        <li>Phone: +44 7834816307</li>
+        <li>Address: Blair Street, Edinburgh, Scotland</li>
+      </ul>
+    </div>
+    <div class="socials">
+      <h2>Connect with Me</h2>
+      <ul>
+        <li><a href="https://linkedin.com/in/remi-thomson" target="_blank">LinkedIn: remi-thomson</a></li>
+        <li><a href="https://github.com/RemiThomson" target="_blank">Github: RemiThomson</a></li>
+        <li><a href="https://instagram.com/remi_thomson" target="_blank">Instagram: remi_thomson</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="content-face4" class="content hidden">
+    <h1>Skills and Technology</h1><br>
+    <div class="skills">
+      <h2>CAD and Simulation</h2>
+      <ul>
+        <li>SolidWorks</li>
+        <li>Autodesk Inventor</li>
+        <li>LTspice</li>
+      </ul>
+  
+      <h2>Hardware and Electronics</h2>
+      <ul>
+        <li>STM32CubeIDE</li>
+        <li>Arduino</li>
+      </ul>
+  
+      <h2>Software Development</h2>
+      <ul>
+        <li>Python</li>
+        <li>MATLAB</li>
+        <li>C</li>
+        <li>Java</li>
+        <li>JavaScript</li>
+        <li>Haskell</li>
+        <li>MIPS</li>
+        <li>HTML</li>
+        <li>CSS</li>
+      </ul>
+  
+      <h2>Other Tools and Libraries</h2>
+      <ul>
+        <li>Blender</li>
+        <li>three.js</li>
+        <li>GLTF Loader</li>
+        <li>WebGL</li>
+      </ul>
+    </div>
+  </div>
+  
+     
+
+  <div id="content-face3" class="content hidden">
+    <h1>Projects Showcase</h1>  
+    <br>
+    <h2>Interactive 3D Portfolio Website</h2>
+    <a href="index2.html" class="button">View Project</a>
+    <br>  
+    <h2>Audio Amplifier Circuit Design for Digital Conversion</h2>
+    <a href="index3.html" class="button">View Project</a>
+    <br>
+    <h2>Thermometer with LCD module and fan</h2>
+    <a href="index4.html" class="button">View Project</a>
+  </div>
+  
+
+  <div id="content-face5" class="content hidden">
+    <h1>About Me</h1>
+    <p>Hi there! I'm Remi, currently a student at the University of Edinburgh, where I'm working on my MEng in Electronics and Computer Science. I grew up in Aberdeen, where my love for the outdoors first began. Whether it was hiking, mountain biking, or just exploring the beautiful landscapes around me with friends. I always found myself drawn to adventure.
+    <br><br>
+    Now that I'm in Edinburgh, I'm diving deep into the world of electronics and computer science, figuring out how technology can make life better. I had a great time last summer during my internship at SaxaVord UK Space Port, where I got to see firsthand what goes into operating a spaceport and work on some pretty cool projects.
+    <br><br> 
+    Lately, I've been focused on developing a range of tech projects that combine my skills in electronics and programming. From creating innovative hardware solutions to working developing my skills creating software, I love tackling challenging problems and bringing ideas to life. 
+    <br><br>
+    I'm currently on a mission to visit every country in Europe. I love exploring new places and experiencing all the different cultures and landscapes along the way, which inspired the design I chose for this website.
+    </p>
+  </div>
+
+  <!-- Canvas for the Three.js Scene -->
+  <canvas id="bg"></canvas>
+
+  <script type="module" src="/index.js"></script>
+</body>
+</html>
