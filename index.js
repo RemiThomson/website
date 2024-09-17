@@ -22,10 +22,10 @@ function updateFaceContent(currentFaceIndex) {
   // Update the current face text
   const faceTexts = [
     'Welcome to my Online Portfolio', 
-    'Contact Information and Socials', 
-    'Skills and Technology', 
-    'Projects Showcase', 
-    'About Me'
+    '', 
+    '', 
+    '', 
+    ''
   ];
   const currentFace = document.getElementById('current-face');
   currentFace.innerText = faceTexts[currentFaceIndex];
