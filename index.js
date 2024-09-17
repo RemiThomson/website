@@ -5,6 +5,7 @@ function getById(id) {
   return document.getElementById(id);
 }
 
+
 // Function to update the content and face text based on the current face
 function updateFaceContent(currentFaceIndex) {
   // Hide all content sections
