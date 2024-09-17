@@ -20,10 +20,10 @@ function init() {
 
   // Load the GLTF model
   const loader = new THREE.GLTFLoader();
-  loader.load('/earth_cartoon2.glb', function(gltf) {
+  loader.load('dist/earth_cartoon2.glb', function(gltf) {
     const model = gltf.scene;
     scene.add(model);
-
+  
     // Animation loop
     function animate() {
       requestAnimationFrame(animate);
