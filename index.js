@@ -18,7 +18,7 @@ function updateFaceContent(currentFaceIndex) {
 
   // Update the current face text
   const faceTexts = [
-    'Welcome to my Online Portfolio',
+    '',
     '',
     '',
     '',

@@ -47,6 +47,8 @@ ul {
 
 #page-title {
   display: none; /* Initially hidden */
+  font-size: 55px;
+  font-weight: normal;
 }
 
 #current-face {
